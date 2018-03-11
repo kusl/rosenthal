@@ -1,0 +1,56 @@
+    var fm_currentDate = new Date();
+    var FormCurrency_9 = '$';
+    var FormPaypalTax_9 = '0';
+    var check_submit9 = 0;
+    var check_before_submit9 = {};
+    var required_fields9 = ["2","3","4","5","6"];
+    var labels_and_ids9 = {"2":"type_name","3":"type_submitter_mail","4":"type_text","5":"type_radio","6":"type_textarea","7":"type_radio","1":"type_submit_reset"};
+    var check_regExp_all9 = [];
+    var check_paypal_price_min_max9 = [];
+    var file_upload_check9 = [];
+    var spinner_check9 = [];
+    var scrollbox_trigger_point9 = '20';
+    var header_image_animation9 = 'none';
+    var scrollbox_loading_delay9 = '0';
+    var scrollbox_auto_hide9 = '1';
+         function before_load9() {	
+}	
+ function before_submit9() {
+	 }	
+ function before_reset9() {	
+}
+    function onload_js9() {
+    }
+    function condition_js9() {
+    }
+    function check_js9(id, form_id) {
+    if (id != 0) {
+    x = jQuery("#" + form_id + "form_view"+id);
+    }
+    else {
+    x = jQuery("#form"+form_id);
+    }    }
+    function onsubmit_js9() {
+    
+  jQuery("<input type=\"hidden\" name=\"wdform_5_allow_other9\" value=\"yes\" />").appendTo("#form9");
+  jQuery("<input type=\"hidden\" name=\"wdform_5_allow_other_num9\" value=\"4\" />").appendTo("#form9");
+  jQuery("<input type=\"hidden\" name=\"wdform_7_allow_other9\" value=\"no\" />").appendTo("#form9");
+  jQuery("<input type=\"hidden\" name=\"wdform_7_allow_other_num9\" value=\"0\" />").appendTo("#form9");
+  var disabled_fields = "";
+  jQuery("#form9 div[wdid]").each(function() {
+    if(jQuery(this).css("display") == "none") {
+      disabled_fields += jQuery(this).attr("wdid");
+      disabled_fields += ",";
+    }
+    if(disabled_fields) {
+      jQuery("<input type=\"hidden\" name=\"disabled_fields9\" value =\""+disabled_fields+"\" />").appendTo("#form9");
+    }
+  });    }
+    jQuery(window).load(function () {
+    formOnload(9);
+    });
+    form_view_count9 = 0;
+    jQuery(document).ready(function () {
+    fm_document_ready(9);
+    });
+    

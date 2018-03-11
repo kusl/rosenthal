@@ -1,0 +1,156 @@
+    var fm_currentDate = new Date();
+    var FormCurrency_8 = '$';
+    var FormPaypalTax_8 = '0';
+    var check_submit8 = 0;
+    var check_before_submit8 = {};
+    var required_fields8 = ["2","4","3","6","7","9"];
+    var labels_and_ids8 = {"2":"type_name","4":"type_submitter_mail","3":"type_phone_new","6":"type_text","7":"type_text","9":"type_date_range","1":"type_submit_reset"};
+    var check_regExp_all8 = {"6":["%5E%28-%29%3F%5B0-9%5D+%24","","Must be a number."]};
+    var check_paypal_price_min_max8 = [];
+    var file_upload_check8 = [];
+    var spinner_check8 = [];
+    var scrollbox_trigger_point8 = '20';
+    var header_image_animation8 = 'none';
+    var scrollbox_loading_delay8 = '0';
+    var scrollbox_auto_hide8 = '1';
+         function before_load8() {	
+}	
+ function before_submit8() {
+	 }	
+ function before_reset8() {	
+}
+    function onload_js8() {
+								jQuery("#wdform_3_element8").intlTelInput({
+									nationalMode: false,
+									preferredCountries: [ "us" ],
+									customPlaceholder: "Phone",
+								});
+							
+  jQuery("#button_calendar_90").click(function() {
+    jQuery("#wdform_9_element80").datepicker("show");
+  });
+  jQuery("#button_calendar_91").click(function() {
+    jQuery("#wdform_9_element81").datepicker("show");
+  });
+  jQuery("input[id^='wdform_9_element8']").datepicker({
+    dateFormat: "mm/dd/yy",
+    minDate: "",
+    maxDate: "",
+    changeMonth: true,
+    changeYear: true,
+    yearRange: "-100:+50",
+    showOtherMonths: true,
+    selectOtherMonths: true,
+    firstDay: "0",
+    beforeShow: function(input, inst) {
+      jQuery("#ui-datepicker-div").addClass("fm_datepicker");
+    },
+    beforeShowDay: function(date){
+      var invalid_dates = "";
+      var invalid_dates_finish = [];
+      var invalid_dates_start = invalid_dates.split(",");
+      var invalid_date_range =[];
+      for(var i = 0; i < invalid_dates_start.length; i++ ){
+        invalid_dates_start[i] = invalid_dates_start[i].trim();
+        if(invalid_dates_start[i].length < 11 || invalid_dates_start[i].indexOf("-") == -1) {
+          invalid_dates_finish.push(invalid_dates_start[i]);
+        }
+        else {
+          if(invalid_dates_start[i].indexOf("-") > 4) {
+            invalid_date_range.push(invalid_dates_start[i].split("-"));
+          }
+          else {
+            var invalid_date_array = invalid_dates_start[i].split("-");
+            var start_invalid_day = invalid_date_array[0] + "-" + invalid_date_array[1] + "-" + invalid_date_array[2];
+            var end_invalid_day = invalid_date_array[3] + "-" + invalid_date_array[4] + "-" + invalid_date_array[5];
+            invalid_date_range.push([start_invalid_day, end_invalid_day]);
+          }
+        }
+      }
+      jQuery.each(invalid_date_range, function( index, value ) {
+        for(var d = new Date(value[0]); d <= new Date(value[1]); d.setDate(d.getDate() + 1)) {
+          invalid_dates_finish.push(jQuery.datepicker.formatDate("mm/dd/yy", d));
+        }
+      });
+      var string_days = jQuery.datepicker.formatDate("mm/dd/yy", date);
+      var day = date.getDay();
+      return [ invalid_dates_finish.indexOf(string_days) == -1 ];
+    }
+  });
+  var default_date_start;
+  var date_start_value = jQuery("#wdform_9_element80").val();
+  (date_start_value != "") ? default_date_start = date_start_value : default_date_start = "";
+  var format_date = "mm/dd/yy";
+  jQuery("#wdform_9_element8").datepicker("option", "dateFormat", format_date);
+  if(default_date_start =="today") {
+    jQuery("#wdform_9_element80").datepicker("setDate", new Date());
+    jQuery("#wdform_9_element81").datepicker("option", "minDate", new Date());
+  }
+  else if(default_date_start.indexOf("d") == -1 && default_date_start.indexOf("m") == -1 && default_date_start.indexOf("y") == -1 && default_date_start.indexOf("w") == -1) {
+    if(default_date_start !== "") {
+      default_date_start = jQuery.datepicker.formatDate(format_date, new Date(default_date_start));
+      jQuery("#wdform_9_element80").datepicker("setDate", default_date_start);
+      jQuery("#wdform_9_element81").datepicker("option", "minDate", default_date_start);
+    }
+    else {
+      jQuery("#wdform_9_element80").datepicker("setDate", default_date_start);
+    }
+  }
+  else {
+    jQuery("#wdform_9_element80").datepicker("setDate", default_date_start);
+    jQuery("#wdform_9_element81").datepicker("option", "minDate", default_date_start);
+  }
+  var default_date_end;
+  var date_end_value = jQuery("#wdform_9_element81").val();
+  (date_end_value != "") ? default_date_end = date_end_value : default_date_end = "";
+  var format_date = "mm/dd/yy";
+  jQuery("#wdform_9_element80").datepicker("option", "dateFormat", format_date);
+  jQuery("#wdform_9_element81").datepicker("option", "dateFormat", format_date);
+  if(default_date_end =="today") {
+    jQuery("#wdform_9_element81").datepicker("setDate", new Date());
+    jQuery("#wdform_9_element80").datepicker("option", "maxDate", new Date());
+  }
+  else if(default_date_end.indexOf("d") == -1 && default_date_end.indexOf("m") == -1 && default_date_end.indexOf("y") == -1 && default_date_end.indexOf("w") == -1) {
+    if(default_date_end !== "") {
+      default_date_end = jQuery.datepicker.formatDate(format_date, new Date(default_date_end));
+      jQuery("#wdform_9_element81").datepicker("setDate", default_date_end);
+      jQuery("#wdform_9_element80").datepicker("option", "maxDate", default_date_end);
+    }
+    else {
+      jQuery("#wdform_9_element81").datepicker("setDate", default_date_end);
+    }
+  }
+  else {
+    jQuery("#wdform_9_element81").datepicker("setDate", default_date_end);
+    jQuery("#wdform_9_element80").datepicker("option", "maxDate", default_date_end);
+  }
+    }
+    function condition_js8() {
+    }
+    function check_js8(id, form_id) {
+    if (id != 0) {
+    x = jQuery("#" + form_id + "form_view"+id);
+    }
+    else {
+    x = jQuery("#form"+form_id);
+    }    }
+    function onsubmit_js8() {
+    
+  var disabled_fields = "";
+  jQuery("#form8 div[wdid]").each(function() {
+    if(jQuery(this).css("display") == "none") {
+      disabled_fields += jQuery(this).attr("wdid");
+      disabled_fields += ",";
+    }
+    if(disabled_fields) {
+      jQuery("<input type=\"hidden\" name=\"disabled_fields8\" value =\""+disabled_fields+"\" />").appendTo("#form8");
+    }
+  });    }
+    jQuery(window).load(function () {
+    formOnload(8);
+    });
+    form_view_count8 = 0;
+    jQuery(document).ready(function () {
+    fm_document_ready(8);
+    });
+    
